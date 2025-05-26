@@ -46,7 +46,7 @@ public class Main {
                         while (!validInput) {
                             System.out.print("Enter Student Name: ");
                             name = sc.nextLine();
-                            if (!name.trim().isEmpty()) {
+                            if (!name.trim().isEmpty() && Main.containsAlphabet(name)) {
                                 validInput = true; // Valid name
                             } else {
                                 System.out.println("Name cannot be empty. Try again.");
@@ -90,7 +90,7 @@ public class Main {
                         // Once all inputs are valid, create Student and add to the manager
                         Student s = new Student(id, name, age, marks);
                         manager.addStudent(s);
-                        System.out.println("Student added successfully!");
+
 
                     } catch (Exception e) {
                         System.out.println("An unexpected error occurred: " + e.getMessage());
@@ -150,5 +150,16 @@ public class Main {
                 return;
             }
         }
+    }
+    public static boolean containsAlphabet(String str) {
+        if (str == null || str.isEmpty()) {
+            return false;
+        }
+        for (char ch : str.toCharArray()) {
+            if (Character.isLetter(ch)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

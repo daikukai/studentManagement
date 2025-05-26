@@ -13,15 +13,90 @@ public class Main {
             int choice = sc.nextInt();
             switch (choice) {
                 case 1:
-                    System.out.println("Enter Student ID, Name, Age and Marks");
-                    int id = sc.nextInt();
-                    String name = sc.next();
-                    int age = sc.nextInt();
-                    double marks = sc.nextDouble();
-                    Student s = new Student(id, name, age, marks);
-                    manager.addStudent(s);
-                    break;
+                    System.out.println("Enter Student ID, Name, Age, and Marks:");
 
+                    int id = 0;
+                    String name = "";
+                    int age = 0;
+                    double marks = 0;
+
+                    boolean validInput = false; // Flag to manage re-prompting
+                    try {
+                        // Validate ID input
+                        while (!validInput) {
+                            System.out.print("Enter Student ID (positive integer): ");
+                            if (sc.hasNextInt()) {
+                                id = sc.nextInt();
+                                if (id > 0) {
+                                    validInput = true; // Valid ID
+                                } else {
+                                    System.out.println("ID must be a positive integer. Try again.");
+                                }
+                            } else {
+                                System.out.println("Invalid input. Please enter a valid integer for ID.");
+                                sc.next(); // Clear invalid input
+                            }
+                        }
+
+                        // Consume the newline left by sc.nextInt()
+                        sc.nextLine();
+
+                        // Validate Name input
+                        validInput = false;
+                        while (!validInput) {
+                            System.out.print("Enter Student Name: ");
+                            name = sc.nextLine();
+                            if (!name.trim().isEmpty()) {
+                                validInput = true; // Valid name
+                            } else {
+                                System.out.println("Name cannot be empty. Try again.");
+                            }
+                        }
+
+                        // Validate Age input
+                        validInput = false;
+                        while (!validInput) {
+                            System.out.print("Enter Student Age (integer between 1 and 120): ");
+                            if (sc.hasNextInt()) {
+                                age = sc.nextInt();
+                                if (age > 0 && age <= 120) {
+                                    validInput = true; // Valid age
+                                } else {
+                                    System.out.println("Age must be between 1 and 120. Try again.");
+                                }
+                            } else {
+                                System.out.println("Invalid input. Please enter a valid integer for Age.");
+                                sc.next(); // Clear invalid input
+                            }
+                        }
+
+                        // Validate Marks input
+                        validInput = false;
+                        while (!validInput) {
+                            System.out.print("Enter Student Marks (double between 0 and 100): ");
+                            if (sc.hasNextDouble()) {
+                                marks = sc.nextDouble();
+                                if (marks >= 0 && marks <= 100) {
+                                    validInput = true; // Valid marks
+                                } else {
+                                    System.out.println("Marks must be between 0 and 100. Try again.");
+                                }
+                            } else {
+                                System.out.println("Invalid input. Please enter a valid double for Marks.");
+                                sc.next(); // Clear invalid input
+                            }
+                        }
+
+                        // Once all inputs are valid, create Student and add to the manager
+                        Student s = new Student(id, name, age, marks);
+                        manager.addStudent(s);
+                        System.out.println("Student added successfully!");
+
+                    } catch (Exception e) {
+                        System.out.println("An unexpected error occurred: " + e.getMessage());
+                        sc.nextLine(); // Clear the scanner buffer
+                    }
+                    break;
                 case 2: // View all students
                     manager.viewStudents();
                     break;

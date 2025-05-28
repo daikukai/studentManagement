@@ -109,12 +109,12 @@ public class StudentManager {
             s.SetName(name);
             s.SetAge(age);
             s.SetMarks(marks);
-            System.out.println("Student record updated successfully.");
-
-        } else {
+            
+        return true; // Indicate success
+        } else { // Student not found
             System.out.println("Student not found.");
         }
-        return false;
+        return false; // Indicate failure
     }
 
     /**

@@ -25,10 +25,19 @@ public class Main {
                         // Validate ID input
                         while (!validInput) {
                             System.out.print("Enter Student ID (positive integer): ");
+
+
+                            // Check if input is a valid integer
                             if (sc.hasNextInt()) {
                                 id = sc.nextInt();
-                                if (id > 0) {
-                                    validInput = true; // Valid ID
+
+                                if (id > 0) { // Check if ID is positive
+                                    // Check for duplicate ID after we have valid input
+                                    if (manager.isDuplicateId(id)) {
+                                        System.out.println("Error: Duplicate ID detected. Please try again.");
+                                    } else {
+                                        validInput = true; // Valid ID and no duplicates
+                                    }
                                 } else {
                                     System.out.println("ID must be a positive integer. Try again.");
                                 }
@@ -37,6 +46,7 @@ public class Main {
                                 sc.next(); // Clear invalid input
                             }
                         }
+
 
                         // Consume the newline left by sc.nextInt()
                         sc.nextLine();

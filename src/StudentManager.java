@@ -27,6 +27,19 @@ public class StudentManager {
         System.out.println("Student added successfully!");
     }
 
+    // Method to check for duplicate Student ID
+    public boolean isDuplicateId(int id) {
+        for (Student student : students) {
+            if (student.getID() == id) {
+                return true; // Duplicate found, exit method
+            }
+        }
+        return false; // No duplicates, return false after full iteration
+    }
+
+
+
+
     /**
      * Displays the list of students in the console.
      */
@@ -85,8 +98,6 @@ public class StudentManager {
 
     /**
      * Updates the information of a student with the given ID.
-     *
-     * @param id    the unique ID of the student to update.
      * @param name  the new name of the student.
      * @param age   the new age of the student.
      * @param marks the new marks of the student.
@@ -98,6 +109,8 @@ public class StudentManager {
             s.SetName(name);
             s.SetAge(age);
             s.SetMarks(marks);
+            System.out.println("Student record updated successfully.");
+
         } else {
             System.out.println("Student not found.");
         }
